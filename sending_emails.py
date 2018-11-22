@@ -13,13 +13,11 @@ class Mail:
     def send_mail(self, emailUser, to, password, subject, text):
         
         TO = [to] #must be a list
-
         message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
         """ % (emailUser, ", ".join(TO), subject, text)
 
-        try:
-            #server = smtplib.SMTP(SERVER) 
-            server = smtplib.SMTP("smtp.gmail.com", 587) #or port 465 doesn't seem to work!
+        try: 
+            server = smtplib.SMTP("smtp.gmail.com", 587) #or port 465 
             server.ehlo()
             server.starttls()
             server.login(emailUser, password)
@@ -46,4 +44,5 @@ print("Enter Your text mail")
 text = input()
 
 mail1 = Mail(emailUser, to ,password, subject, text )
+
 mail1.send_mail(emailUser, to, password, subject, text)
